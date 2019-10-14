@@ -1,11 +1,12 @@
+import requests
 from bs4 import BeautifulSoup
-from selenium import webdriver
 
-url = ('https://www.aladin.info/sr/bosna-i-hercegovina/brcko-dugorocna-prognoza-vremena')
+response = requests.get('https://www.aladin.info/sr/bosna-i-hercegovina/brcko-dugorocna-prognoza-vremena')
 
-browser = webdriver.Chrome('resources/chromedriver.exe')
+status = response.status_code
+soup = BeautifulSoup(response.text, 'lxml')
 
-soup = BeautifulSoup(browser.page_source, 'lxml')
+tomorrow = soup.find_all('li', class_='font_150_rem text-primary')[2]
 
-
-print(soup)
+print(status)
+print(tomorrow.text)
