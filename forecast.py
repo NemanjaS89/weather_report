@@ -24,7 +24,7 @@ def send_mail():
     server.login(mail_user, pass_user)
     
     subject = 'Vremenska prognoza'
-    body = 'Ova poruka je automatski generisan izvjestaj!\n\nPrognozirana temperatura za sutra ujutro je {}'.format(temperature)
+    body = 'Ova poruka je automatski generisan izvjestaj!\n\nPrognozirana temperatura za sutra ujutro je {} stepeni Celzijusa.\n\nPripremite jakne.'.format(temperature)
     msg = f"Subject: {subject}\n\n{body}"
     
     server.sendmail(
@@ -34,4 +34,5 @@ def send_mail():
     )
     
 
-send_mail()
+if int(temperature) <= 10:
+    send_mail()
